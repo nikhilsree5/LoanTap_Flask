@@ -1,4 +1,4 @@
-FROM python:3.13.5-slim-bullseye
+FROM python:3.13.5-slim
 WORKDIR /docker
 
 
@@ -10,4 +10,6 @@ RUN pip install -r requirements.txt
 # Copy in the source code
 COPY . .
 
-CMD ["python3", "-m", "flask","--app" ,"loantap","run","--host=0.0.0.0"]
+EXPOSE 5000
+
+CMD [ "flask","--app" ,"loantap","run","--host=0.0.0.0", "--port=5000"]
