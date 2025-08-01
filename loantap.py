@@ -9,7 +9,7 @@ from sklearn.linear_model import LogisticRegression
 from flask import Flask,request
 
 def preprocessing():
-    df=pd.read_csv('C:\\Users\\Aswathi Valsan\\Loantap\\LoanTap_Flask\\loanTap.csv')
+    df=pd.read_csv('/loantap.csv')
     df['term']=df['term'].apply(lambda x:36 if x=='36 months' else 60)
     df['loan_status'] = df['loan_status'].apply(lambda x: 1 if x == 'Fully Paid' else 0)
     return df
@@ -161,14 +161,8 @@ def loantap():
     df=preprocessing()
     model=model_build(df)
     y=np.round(prediction(model,params))
-    result = "Loan Sanctioned" if y[0] else "Loan Declined"
+    result = "Loan Approved" if y[0] else "Loan Declined"
     return f"<h2 style='text-align:center; color:#333;'>{result}</h2>"
-
-    # if(y[0]):
-    #     return "Loan Sanctioned"
-    # else:
-    #     return "Loan Declined"
-
 
 # if __name__ == '__main__':
 #     app.run(debug=True)
