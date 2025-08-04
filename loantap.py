@@ -149,20 +149,28 @@ def home():
      return render_template_string
 
 
-@app.route('/predict',methods =['POST'])
+@app.route('/predict',methods =['GET','POST'])
 def loantap():
     # loan_req = json.loads(request.data)
     # loan_req=request.get_json()
-    loan_req = request.form.to_dict()
-    print(loan_req)
-    a=list(loan_req.values())
-    b = list(map(int, a))
-    params = np.array(b).reshape(1,-1)
-    df=preprocessing()
-    model=model_build(df)
-    y=np.round(prediction(model,params))
-    result = "Loan Approved" if y[0] else "Loan Declined"
-    return f"<h2 style='text-align:center; color:#333;'>{result}</h2>"
+    if request.method == 'GET':
+        return f"<h2 style='text-align:center; color:#333;'>I will make the predictions.</h2>"
+    else:
+        loan_req = request.form.to_dict()
+        print(loan_req)
+        a=list(loan_req.values())
+        b = list(map(int, a))
+        params = np.array(b).reshape(1,-1)
+        df=preprocessing()
+        model=model_build(df)
+        y=np.round(prediction(model,params))
+        if(y[0]):
+            return f"<h2 style='text-align:center; color:#0F0;'>Loan Approved</h2>"
+        else:
+            return f"<h2 style='text-align:center; color:#F00;'>Loan Rejected</h2>"
+
+        # result = "Loan Approved" if y[0] else "Loan Declined"
+        # return f"<h2 style='text-align:center; color:#333;'>{result}</h2>"
 
 # if __name__ == '__main__':
 #     app.run(debug=True)
