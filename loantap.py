@@ -9,7 +9,7 @@ from sklearn.linear_model import LogisticRegression
 from flask import Flask,request
 
 def preprocessing():
-    df=pd.read_csv('/loantap.csv')
+    df=pd.read_csv('loantap.csv')
     df['term']=df['term'].apply(lambda x:36 if x=='36 months' else 60)
     df['loan_status'] = df['loan_status'].apply(lambda x: 1 if x == 'Fully Paid' else 0)
     return df
