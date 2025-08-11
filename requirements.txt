@@ -16,4 +16,4 @@ urllib3==2.4.0
 Werkzeug==2.3.8
 pluggy==1.6.0
 Ipython==8.16.0
-streamlit==1.28.0
+
