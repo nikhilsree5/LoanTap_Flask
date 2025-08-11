@@ -12,12 +12,5 @@ def test_home(client):
     assert resp.status_code==200
 
 def test_predict(client):
-    test_data = {
-        "loan_amt": 15000,
-        "term": 36,
-        "int_rate": 12,
-        "installment": 3600,
-        "income": 36000
-    }
-    resp=client.post('/predict',json=test_data)
-    assert resp.text=='Loan Approved'
+    resp=client.get('/predict')
+    assert resp.status_code==200

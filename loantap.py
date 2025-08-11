@@ -157,7 +157,7 @@ def loantap():
         return f"<h2 style='text-align:center; color:#333;'>I will make the predictions.</h2>"
     else:
         loan_req = request.form.to_dict()
-        print(loan_req)
+        print(request.form)
         a=list(loan_req.values())
         b = list(map(int, a))
         params = np.array(b).reshape(1,-1)
